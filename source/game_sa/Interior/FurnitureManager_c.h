@@ -4,15 +4,16 @@
 #include "FurnitureGroup_c.h"
 #include "FurnitureSubGroup_c.h"
 #include "FurnitureItem.h"
+#include "Furniture_c.h"
 #include "List_c.h"
 
-class Furniture_c;
 
 class FurnitureManager_c {
 private:
     static inline auto& g_currSubGroupId  = StaticRef<uint32>(0xBAB37C);
     static inline auto& g_currFurnitureId = StaticRef<uint32>(0xBAB378);
     static inline auto& g_subGroupStore   = StaticRef<std::array<FurnitureSubGroup_c, 128>>(0xBAD3F8);
+    static inline auto& g_furnitureStore  = StaticRef<std::array<Furniture_c, 256>>(0xBAE1F8);
 
 public:
     static void InjectHooks();
@@ -23,6 +24,7 @@ public:
     static int32 GetGroupId(const char* name);
     static int32 GetSubGroupId(const char* name);
     static FurnitureSubGroup_c* NewSubGroup();
+    static Furniture_c* NewFurniture();
 
     bool Init();
     void Exit();

@@ -46,6 +46,13 @@ FurnitureSubGroup_c* FurnitureManager_c::NewSubGroup() {
         : nullptr;
 }
 
+// notsa
+Furniture_c* FurnitureManager_c::NewFurniture() {
+    return g_currFurnitureId < std::size(g_furnitureStore)
+        ? &g_furnitureStore[g_currFurnitureId++]
+        : nullptr;
+}
+
 // 0x5C0280
 void FurnitureManager_c::LoadFurniture() {
     auto file = CFileMgr::OpenFile("data\\furnitur.dat", "rb");

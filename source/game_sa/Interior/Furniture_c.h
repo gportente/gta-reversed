@@ -8,8 +8,8 @@ public:
     int16 m_nId;                      // 0xA
     int8  m_nWidthX;                  // 0xC
     int8  m_nWidthY;                  // 0xD
-    int8  m_nWealthMin;               // 0xE
-    int8  m_nWealthMax;               // 0xF
+    uint8 m_nWealthMin;               // 0xE
+    uint8 m_nWealthMax;               // 0xF
     bool  m_bCanPlaceInFrontOfWindow; // 0x10
     bool  m_bIsTall;                  // 0x11
     bool  m_bCanSteal;                // 0x12
