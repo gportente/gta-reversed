@@ -941,15 +941,12 @@ void CCamera::UpdateTargetEntity() {
     const auto player = FindPlayerPed();
     assert(player);
 
-    auto something{ true };
+    auto isObbeCamOnArrestedPlayer{ false };
     if (m_nWhoIsInControlOfTheCamera == 2) {
-        m_nModeObbeCamIsInForCar = m_nModeObbeCamIsInForCar;
         switch (m_nModeObbeCamIsInForCar) {
         case 8:
         case 7: {
-            if (player->m_nPedState != PEDSTATE_ARRESTED) {
-                something = false;
-            }
+            isObbeCamOnArrestedPlayer = player->m_nPedState == PEDSTATE_ARRESTED;
 
             if (!FindPlayerVehicle()) {
                 CEntity::ChangeEntityReference(m_pTargetEntity, player);
@@ -960,7 +957,7 @@ void CCamera::UpdateTargetEntity() {
         }
     }
 
-    if (!m_bLookingAtPlayer && !something || m_bTransitionState) {
+    if (!m_bLookingAtPlayer && !isObbeCamOnArrestedPlayer || m_bTransitionState) {
         if (m_pTargetEntity) {
             if (!m_bTargetJustBeenOnTrain) {
                 return;
