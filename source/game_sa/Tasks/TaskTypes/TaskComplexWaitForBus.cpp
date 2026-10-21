@@ -11,11 +11,11 @@ void CTaskComplexWaitForBus::InjectHooks() {
 
     RH_ScopedInstall(Destructor, 0x632930);
 
-    RH_ScopedVMTInstall(Clone, 0x636A60, {.Reversed = false});
-    RH_ScopedVMTInstall(GetTaskType, 0x632920, {.Reversed = false});
-    RH_ScopedVMTInstall(CreateNextSubTask, 0x632940, {.Reversed = false});
-    RH_ScopedVMTInstall(CreateFirstSubTask, 0x638940, {.Reversed = false});
-    RH_ScopedVMTInstall(ControlSubTask, 0x632A40, {.Reversed = false});
+    RH_ScopedVMTInstall(Clone, 0x636A60);
+    RH_ScopedVMTInstall(GetTaskType, 0x632920);
+    RH_ScopedVMTInstall(CreateNextSubTask, 0x632940);
+    RH_ScopedVMTInstall(CreateFirstSubTask, 0x638940);
+    RH_ScopedVMTInstall(ControlSubTask, 0x632A40);
 }
 
 CTaskComplexWaitForBus::CTaskComplexWaitForBus(const CTaskComplexWaitForBus& o) :
@@ -34,11 +34,9 @@ CTask* CTaskComplexWaitForBus::CreateNextSubTask(CPed* ped) {
         ped->m_bRemoveFromWorld = true;
         ped->bDontDragMeOutCar = true;
 
-
         if (const auto player = FindPlayerPed()) {
-            if (m_bus->IsPassenger(player) || m_bus->IsDriver(player)) { // NOTE: Why complicate it so much? `ped->IsInVehicle(player)` ?
-                assert(player->IsInVehicle(m_bus)); // This should always hold true. If so, replace above with this
-                player->GetPlayerData()->m_nBusFaresCollected += 5; // TODO: Fix bugs.
+            if (m_bus->IsPassenger(player) || m_bus->IsDriver(player)) {
+                player->GetPlayerData()->m_nBusFaresCollected += 5;
             }
         }
 
