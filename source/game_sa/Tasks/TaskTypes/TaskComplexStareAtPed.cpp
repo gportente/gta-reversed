@@ -92,13 +92,12 @@ CTask* CTaskComplexStareAtPed::ControlSubTask(CPed* ped) {
     CTaskComplexGangLeader::DoGangAbuseSpeech(ped, m_pPed);
 
     if (m_lookInitialised) {
-        m_pPed = m_pPed;
         if (g_ikChainMan.GetLookAtEntity(ped) != m_pPed) {
             g_ikChainMan.LookAt(
                 "TaskStareAtPed",
                 ped,
                 m_pPed,
-                (int32)&gDefaultTaskTime,
+                gDefaultTaskTime,
                 BONE_HEAD,
                 nullptr,
                 true,
@@ -113,7 +112,7 @@ CTask* CTaskComplexStareAtPed::ControlSubTask(CPed* ped) {
             "TaskStareAtPed",
             ped,
             m_pPed,
-            (int32)&gDefaultTaskTime,
+            gDefaultTaskTime,
             BONE_HEAD,
             nullptr,
             true,
